@@ -1,11 +1,12 @@
 from flask import current_app as app
 from flask import request
-from .model.generate import predict
+from .models.predict import predict
 
 
-@app.route('/')
+@app.route('/', )
 def sarcasm():
     text = request.form.get('text')
+    text = "Hello there"
     prediction = predict(text)
-    result = "sarcastic" if prediction else 'non-sarcastic'
+    result = "sarcastic" if prediction > 0.8 else 'non-sarcastic'
     return {"prediction": result}
